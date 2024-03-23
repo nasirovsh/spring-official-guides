@@ -18,10 +18,4 @@ public class ScheduledTasks {
     public void reportCurrentTime() {
         log.info("The time now is {}", dateFormat.format(new Date()));
     }
-
-    @Scheduled(fixedDelay = 1000)
-    public void scheduleFixedDelayTask() {
-        System.out.println(
-                "Fixed delay task - " + System.currentTimeMillis() / 1000);
-    }
 }

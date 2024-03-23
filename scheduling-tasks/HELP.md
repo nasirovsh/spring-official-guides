@@ -17,6 +17,9 @@ Enable in `src/main/java/com/example/schedulingtasks/SchedulingTasksApplication.
 
 - **@ComponentScan**: Tells Spring to look for other components, configurations, and services in the com/example package, letting it find the controllers.
 
+**@EnableScheduling** annotation ensures that a background task executor is created. Without it, nothing gets scheduled.
+
+
 ## Build an executable JAR with Gradle
 
 ```shell
@@ -90,5 +93,17 @@ public void scheduleFixedRateWithInitialDelayTask() {
     long now = System.currentTimeMillis() / 1000;
     System.out.println(
       "Fixed rate task with one second initial delay - " + now);
+}
+```
+
+### Schedule a Task Using Cron Expressions
+
+```java
+@Scheduled(cron = "0 15 10 15 * ?")
+public void scheduleTaskUsingCronExpression() {
+ 
+    long now = System.currentTimeMillis() / 1000;
+    System.out.println(
+      "schedule tasks using cron jobs - " + now);
 }
 ```
