@@ -5,9 +5,13 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @EnableAsync
 @Component
 public class ScheduledTaskExamples {
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
     @Scheduled(fixedDelay = 1000)
     public void scheduleFixedDelayTask() {
@@ -36,6 +40,18 @@ public class ScheduledTaskExamples {
 
         long now = System.currentTimeMillis() / 1000;
         System.out.println(
-                "schedule tasks using cron jobs - " + now);
+                "Schedule tasks using cron jobs - " + now);
+    }
+
+    @Scheduled(fixedDelayString = "${fixedDelay.in.milliseconds}")
+    public void parametrizedScheduledTaskWithFixedDelay() {
+        System.out.println(
+                "Parametrized Fixed delay task executed at " + dateFormat.format(new Date()));
+    }
+
+    @Scheduled(cron = "${cron.expression}")
+    public void parametrizedScheduleTaskUsingCronExpression() {
+        System.out.println(
+                "Parametrized cron job executed at  " + dateFormat.format(new Date()));
     }
 }

@@ -107,3 +107,43 @@ public void scheduleTaskUsingCronExpression() {
       "schedule tasks using cron jobs - " + now);
 }
 ```
+
+By default, Spring will use the server’s local time zone for the cron expression. However, we can use the zone attribute to change this timezone:
+
+```java
+@Scheduled(cron = "0 15 10 15 * ?", zone = "Europe/Paris")
+```
+
+With this configuration, Spring will schedule the annotated method to run at 10:15 AM on the 15th day of every month in Paris time.
+
+### Parameterizing the Schedule
+
+Control the schedule without re-compiling and re-deploying the entire app.
+
+Make use of Spring Expressions to externalize the configuration of the tasks, and we’ll store these in properties files.
+
+A fixedDelay task:
+```java
+@Scheduled(fixedDelayString = "${fixedDelay.in.milliseconds}")
+```
+A fixedRate task:
+```java
+@Scheduled(fixedRateString = "${fixedRate.in.milliseconds}")
+```
+A cron expression based task:
+```java
+@Scheduled(cron = "${cron.expression}")
+```
+
+
+
+
+### Links
+- [https://spring.io/guides](https://spring.io/guides)
+- [https://www.baeldung.com/start-here](https://www.baeldung.com/start-here)
+- https://www.baeldung.com/spring-scheduled-tasks
+- https://www.baeldung.com/spring-task-scheduler
+- [medium article - scheduling-tasks-in-spring](https://medium.com/@AlexanderObregon/scheduling-tasks-in-spring-applications-a-practical-guide-8d28d35493c6)
+
+
+
